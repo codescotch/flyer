@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFlyerPhotosTable extends Migration
 {
-    /**3
+    /**
      * Run the migrations.
      *
      * @return void
@@ -15,9 +15,8 @@ class CreateFlyerPhotosTable extends Migration
         Schema::create('flyer_photos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('flyer_id')->unsigned();
-            $table->foreign('flyer_id')->references('id')->on('flyer_photos')->onDelete('cascade');
-            $table->string('photo');
-            $table->string('title');
+            $table->foreign('flyer_id')->references('id')->on('flyers')->onDelete('cascade');
+            $table->string('path');
             $table->timestamps();
         });
     }
