@@ -24,6 +24,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker)
 $factory->define(App\Flyer::class, function (Faker\Generator $faker)
 {
 	return [
+		// using a factory inside a factory to create an associated user for flyers
+		'user_id'     => factory('App\User')->create()->id,
 		'street'      => $faker->streetAddress,
 		'city'        => $faker->city,
 		'zip'         => $faker->postcode,

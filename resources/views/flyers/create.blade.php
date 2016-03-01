@@ -6,23 +6,20 @@
 
 <hr>
 
-<div class="row">
-    <div class="col-md-6">
-        @if(count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <!-- always set enctype for file uploads -->
-        <form enctype="multipart/form-data" method="POST" action="/public/flyers">
-            @include('flyers.form')
-        </form>
+{{-- note: also have html5 validation in place so this won't trigger for most fields --}}
+@if(count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
-</div>
+@endif
+
+<!-- always set enctype for file uploads -->
+<form method="POST" action="{{ url('/flyers/post') }}" enctype="multipart/form-data">
+    @include('flyers.form')
+</form>
 
 @stop

@@ -1,13 +1,20 @@
 <?php
 
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+Route::group(['middleware' => 'web'], function ()
+{
+	Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+	Route::get('/', 'PagesController@home');
 
-    Route::get('/', function () {
-        return view('pages.home');
-    });
+	Route::post('flyers/post', 'FlyersController@store');
+	Route::resource('flyers', 'FlyersController');
+	Route::get('{zip}/{street}', 'FlyersController@show');
+	// named route
+	Route::post('{zip}/{street}/photos', [
+		'as'   => 'store_photo_path',
+		'uses' => 'PhotosController@store'
+	]);
 
-    Route::resource('flyers', 'FlyersController');
+	Route::delete('photos/{id}', 'PhotosController@destroy');
 });
+

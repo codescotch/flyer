@@ -14,6 +14,8 @@ class CreateFlyersTable extends Migration
     {
         Schema::create('flyers', function (Blueprint $table) {
             $table->increments('id');
+            // NOTE: usually use a foreign key, left it off this time
+            $table->integer('user_id')->unsigned();
             $table->string('street');
             $table->string('city', 40);
             $table->string('zip', 10);
